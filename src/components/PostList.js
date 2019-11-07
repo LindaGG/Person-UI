@@ -5,18 +5,14 @@ class PostList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts : []
+            posts :[]
         }
     }
 
     componentDidMount(){
-        axios.get('http://localhost:8080/person/All')
-            .then(response => {
-                this.setState ({posts : response.data})
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        this.setState({
+            posts : this.props.location.state.detail
+        })
         
     }
     
@@ -24,10 +20,29 @@ class PostList extends Component {
         const {posts} = this.state
         return (
             <div>
-                List of Posts
+                List of Price Satisfied Hotel
                 {
                     posts.length ? 
-                    posts.map(post => <div key = {post.id}> {post.fullName} {post.email} {post.score} {post.userName} {post.password} </div>):
+                    posts.map(post => <div key = {post.id}> 
+                        <div>
+                            Hotel Name : {post.nameWithBrand} 
+                        </div>
+                        <br></br>
+                        <div>
+                            Hotel Price : {post.price} 
+                        </div>
+                        <br></br>
+                        <div>
+                            Hotel Total Rooms : {post.totalRoom} 
+                        </div>
+                        <br></br>
+                        <div>
+                            Hotel Remaining Rooms : {post.remainRoom} 
+                        </div>
+                        <br></br>
+                        <br></br>
+                    </div> 
+                    ):
                     null
                 }
             </div>
